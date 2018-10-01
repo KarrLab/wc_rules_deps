@@ -9,4 +9,9 @@ RUN apt install wget git python3.6 python3-pip -y --no-install-recommends \
  
 RUN apt install nano
 RUN pip install nose 
- 
+
+CMD pip install -e /codebase/wc_rules/
+
+WORKDIR /codebase/wc_rules/
+ENTRYPOINT bash
+
