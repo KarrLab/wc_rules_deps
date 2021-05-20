@@ -1,17 +1,19 @@
 FROM ubuntu:latest
+
 LABEL maintainer="John Sekar johnarul.sekar@gmail.com"
+LABEL date="5/20/2021"
+LABEL ubuntu.version="Ubuntu 20.04.2 LTS"
+LABEL python.version="Python 3.8.5"
+LABEL pip.version="pip 21.1.1"
+LABEL obj_tables.version="1326a32313188ff136611364a66917c00ea4b497"
+
 RUN apt update
-RUN apt install wget git python3.6 python3-pip python3-dev gcc -y --no-install-recommends \
- && pip3 install -U setuptools pip \
- && wget https://raw.githubusercontent.com/KarrLab/wc_rules/master/requirements.txt \
- && pip install -r requirements.txt --process-dependency-links \
+RUN apt install wget git nano python3 python3-pip -y --no-install-recommends \
+ && pip3 install -U setuptools pip nose \
+ && wget https://raw.githubusercontent.com/KarrLab/wc_rules/downsize/requirements.txt \
+ && pip3 install -r requirements.txt \
  && ln -s /usr/bin/python3 /usr/bin/python
- 
-RUN apt install nano
-RUN pip install nose 
 
-CMD pip install -e /codebase/wc_rules/
-
-WORKDIR /codebase/wc_rules/
+CMD pip3 install -e /codebase/wc_rules
+WORKDIR /codebase/wc_rules
 ENTRYPOINT bash
-
